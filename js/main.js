@@ -47,7 +47,7 @@ spotLight.castShadow = true;
 spotLight.shadow.bias = -0.0001;
 scene.add(spotLight);
 
-const loader = new GLTFLoader().setPath('dino/dino/');
+const loader = new GLTFLoader().setPath('models/dino/');
 loader.load('scene.glb', (gltf) => {
   console.log('loading model');
   const mesh = gltf.scene;
