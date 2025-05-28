@@ -26,6 +26,21 @@ let objToRender = 'dino';
 //Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
 
+const loadingDiv = document.createElement('div');
+loadingDiv.id = 'loadingMessage';
+loadingDiv.innerText = 'Loading...';
+loadingDiv.style.position = 'fixed';
+loadingDiv.style.top = '50%';
+loadingDiv.style.left = '50%';
+loadingDiv.style.transform = 'translate(-50%, -50%)';
+loadingDiv.style.fontSize = '2rem';
+loadingDiv.style.color = '#fff';
+loadingDiv.style.background = 'rgba(0,0,0,0.7)';
+loadingDiv.style.padding = '20px 40px';
+loadingDiv.style.borderRadius = '10px';
+loadingDiv.style.zIndex = '1000';
+document.body.appendChild(loadingDiv);
+
 //Load the file
 loader.load(
   `./models/${objToRender}/scene.glb`,
@@ -33,16 +48,22 @@ loader.load(
     //If the file is loaded, add it to the scene
     object = gltf.scene;
     scene.add(object);
+
+    // Yükleme tamamlandığında mesajı gizle
+    loadingDiv.style.display = 'none';
   },
   function (xhr) {
     //While it is loading, log the progress
     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    // (İsterseniz loadingDiv.innerText ile yüzdeyi de gösterebilirsiniz)
   },
   function (error) {
     //If there is an error, log it
     console.error(error);
+    loadingDiv.innerText = 'Error loading model!';
   }
 );
+
 
 //Instantiate a new renderer and set its size
 const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
