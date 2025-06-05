@@ -43,7 +43,7 @@ document.body.appendChild(loadingDiv);
 
 //Load the file
 loader.load(
-  `./models/${objToRender}/scene.glb`,
+  `./models/${objToRender}/scene1.glb`,
   function (gltf) {
     //If the file is loaded, add it to the scene
     object = gltf.scene;
